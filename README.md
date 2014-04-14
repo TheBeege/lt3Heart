@@ -8,6 +8,7 @@ This is my repo to mess around with the lessthan3 dev tools
 ## User Config File ##
 
 lt3 creates a file ~/.lt3\_config. You'll want to edit this guy, otherwise lt3 will break when attempting to init, and you'll pull your hair out for awhile.
+If you do it wrong, attempting `lt3 init` will spit out an error with "undefined", stating that it doesn't recognize character "u". This is because lt3 created the file with contents "undefined", and it's now trying to parse it as JSON.
 
 Here's my .lt3\_config as a sample:
 
@@ -39,9 +40,31 @@ Here's my .lt3\_config as a sample:
       "version": "0.1.1"
     }
 
-The lt3 folks have an example config file, but it's using CSON. Their code is invoking JSON.stringify, so that's no bueno. I may fork it and submit a pull request at some point.
+Now, I'm not sure if this config file is actually used...? I need to test. All I know is that it's required.
 
-I'm unsettled by the fact that this config file is on a per-user basis. I feel like if this platform is to be widely used, a given developer would want to work on multiple apps. I imagine it's possible that they expect an object for each app, but I'll need to test at some point. I'll update once I've tested that.
+## Creating a Package
+
+Basically, you can follow the steps at http://dev.lessthan3.com/docs/developing-a-theme, but I'm currently stuck on Step 6. Here's what I tried:
+
+    beege@beege-VirtualBox:~/lt3Heart/pkg/demo-theme/0.1.1$ lt3 create -e entity-slug
+    Failed to load c++ bson extension, using pure JS version
+    must specify site slug
+    beege@beege-VirtualBox:~/lt3Heart/pkg/demo-theme/0.1.1$ cd ../../
+    beege@beege-VirtualBox:~/lt3Heart/pkg$ cd demo-theme/
+    beege@beege-VirtualBox:~/lt3Heart/pkg/demo-theme$ lt3 create
+    Failed to load c++ bson extension, using pure JS version
+    must specify site slug
+    beege@beege-VirtualBox:~/lt3Heart/pkg/demo-theme$ lt3 create site_slug app_slug pkg
+    Failed to load c++ bson extension, using pure JS version
+    could not find package app_slug@undefined
+    beege@beege-VirtualBox:~/lt3Heart/pkg/demo-theme$ lt3 create demo-theme 0.1.1 pkg
+    Failed to load c++ bson extension, using pure JS version
+    could not find package 0.1.1@undefined
+    beege@beege-VirtualBox:~/lt3Heart/pkg/demo-theme$ lt3 create demo-theme 0.1.1
+    Failed to load c++ bson extension, using pure JS version
+    could not find package 0.1.1@undefined
+
+I found the site\_slug, app\_slug, and pkg references in the lessthan3 in lib/lt3.coffee at line 327. I'll muck with it more later and figure it out.
 
 ## Other Random Notes 
 

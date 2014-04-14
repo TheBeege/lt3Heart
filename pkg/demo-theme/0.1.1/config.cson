@@ -1,0 +1,21 @@
+{
+  changelog:
+    '1.1.0': 'My First theme'
+  id: 'demo-theme'
+  name: 'Demo Theme'
+  settings:
+    style:
+      background_color: {type: 'string', default: '#f8f8f8'}
+      header_color: {type: 'string', default: '#d1d1d1'}
+      content_color: {type: 'string', default: '#e6e6e6cc'}
+      primary_color: {type: 'string', default: '#f00038'}
+      text_color: {type: 'string', default: '#1e1e1e'}
+      imprint: 'string'
+    header:
+      logo: 'string'
+      title: 'string'
+    footer:
+      copyright: 'string'
+  type: 'theme'
+  version: '1.0.0'
+}
